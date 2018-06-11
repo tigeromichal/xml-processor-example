@@ -1,113 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="zamówienia-xhtml.xslt"?>
 <sklep>
-   <data>2018-05-07T21:21:24.933+02:00</data>
-    
+    <data>2018-05-07T21:21:24.933+02:00</data>
+
     <statystyki>
-    <liczba_klientów>10</liczba_klientów>
-    <liczba_produktów>11</liczba_produktów>
+        <liczba_klientów>10</liczba_klientów>
+        <liczba_produktów>11</liczba_produktów>
         <liczba_kategorii>14</liczba_kategorii>
     </statystyki>
-   <kategorie>
-      <kategoria>
-         <nazwa>audio</nazwa>
-         <liczba_produktów>2</liczba_produktów>
-      </kategoria>
-      <kategoria>
-         <nazwa>smartfony</nazwa>
-         <liczba_produktów>3</liczba_produktów>
-      </kategoria>
-      <kategoria>
-         <nazwa>laptopy</nazwa>
-         <liczba_produktów>2</liczba_produktów>
-      </kategoria>
-      <kategoria>
-         <nazwa>telewizory</nazwa>
-         <liczba_produktów>3</liczba_produktów>
-      </kategoria>
-      <kategoria>
-         <nazwa>bielizna_damska</nazwa>
-         <liczba_produktów>1</liczba_produktów>
-      </kategoria>
-   </kategorie>
-        
-    
+    <kategorie>
+        <kategoria>
+            <nazwa>audio</nazwa>
+            <liczba_produktów>2</liczba_produktów>
+        </kategoria>
+        <kategoria>
+            <nazwa>smartfony</nazwa>
+            <liczba_produktów>3</liczba_produktów>
+        </kategoria>
+        <kategoria>
+            <nazwa>laptopy</nazwa>
+            <liczba_produktów>2</liczba_produktów>
+        </kategoria>
+        <kategoria>
+            <nazwa>telewizory</nazwa>
+            <liczba_produktów>3</liczba_produktów>
+        </kategoria>
+        <kategoria>
+            <nazwa>bielizna_damska</nazwa>
+            <liczba_produktów>1</liczba_produktów>
+        </kategoria>
+    </kategorie>
+
+
     <zamówienia>
-      <zamówienie>
-         <klient>Jan Kowalski</klient>
-         <produkt>
-            <id>P001</id>
-            <nazwa>Słuchawki BEST-AUDIO 9000</nazwa>
-            <kategoria>audio</kategoria>
-            <cena>1 x 119.99 PLN</cena>
-            <suma_częściowa>119.99 PLN</suma_częściowa>
-            <vat>27.5977 PLN</vat>
-         </produkt>
-         <suma_końcowa>119.99</suma_końcowa>
-         <suma_kwot_vat>27.5977</suma_kwot_vat>
-         <data>2017-02-28</data>
-         <opis>Proszę zapakować na prezent</opis>
-      </zamówienie>
-      <zamówienie>
-         <klient>Ryszard Pieńskowski</klient>
-         <produkt>
-            <id>P010</id>
-            <nazwa>TELEWIZOR OLED SONY A1 77 CALI KD-77A1E +HT-ST5000</nazwa>
-            <kategoria>telewizory</kategoria>
-            <cena>1 x 89999.00 PLN</cena>
-            <suma_częściowa>89999 PLN</suma_częściowa>
-            <vat>20699.77 PLN</vat>
-         </produkt>
-         <suma_końcowa>89999</suma_końcowa>
-         <suma_kwot_vat>20699.77</suma_kwot_vat>
-         <data>2017-11-11</data>
-         <opis>Dostawa w godzinach 15-17</opis>
-      </zamówienie>
-      <zamówienie>
-         <klient>Jan Jacek</klient>
-         <produkt>
-            <id>P011</id>
-            <nazwa>PAS do Pończoch SPÓDNICZKA</nazwa>
-            <kategoria>bielizna_damska</kategoria>
-            <cena>3 x 19.99 PLN</cena>
-            <suma_częściowa>59.97 PLN</suma_częściowa>
-            <vat>13.7931 PLN</vat>
-         </produkt>
-         <suma_końcowa>59.97</suma_końcowa>
-         <suma_kwot_vat>13.7931</suma_kwot_vat>
-         <data>2018-02-14</data>
-         <opis>Zapakować dyskretnie</opis>
-      </zamówienie>
-      <zamówienie>
-         <klient>Janusz Więckowski</klient>
-         <produkt>
-            <id>P003</id>
-            <nazwa>Smartfon XIAOMI Redmi 4X 32GB Czarny</nazwa>
-            <kategoria>smartfony</kategoria>
-            <cena>2 x 658.00 PLN</cena>
-            <suma_częściowa>1316 PLN</suma_częściowa>
-            <vat>302.68 PLN</vat>
-         </produkt>
-         <produkt>
-            <id>P005</id>
-            <nazwa>Samsung Galaxy A8 (2018) szary</nazwa>
-            <kategoria>smartfony</kategoria>
-            <cena>1 x 1849.99 PLN</cena>
-            <suma_częściowa>1849.99 PLN</suma_częściowa>
-            <vat>425.4977 PLN</vat>
-         </produkt>
-         <produkt>
-            <id>P006</id>
-            <nazwa>Laptop ASUS R541UJ i3-6006U 4GB 1TB GF920-2GB W10</nazwa>
-            <kategoria>laptopy</kategoria>
-            <cena>1 x 2099.00 PLN</cena>
-            <suma_częściowa>2099 PLN</suma_częściowa>
-            <vat>482.77 PLN</vat>
-         </produkt>
-         <suma_końcowa>5264.99</suma_końcowa>
-         <suma_kwot_vat>1210.9477</suma_kwot_vat>
-         <data>2018-02-02</data>
-         <opis>OSTROŻNIE</opis>
-      </zamówienie>
-   </zamówienia>
+        <zamówienie>
+            <klient>Jan Kowalski</klient>
+            <produkt>
+                <id>P001</id>
+                <nazwa>Słuchawki BEST-AUDIO 9000</nazwa>
+                <kategoria>audio</kategoria>
+                <cena>1 x 119.99 PLN</cena>
+                <suma_częściowa>119.99 PLN</suma_częściowa>
+                <vat>27.5977 PLN</vat>
+            </produkt>
+            <suma_końcowa>119.99</suma_końcowa>
+            <suma_kwot_vat>27.5977</suma_kwot_vat>
+            <data>2017-02-28</data>
+            <opis>Proszę zapakować na prezent</opis>
+        </zamówienie>
+        <zamówienie>
+            <klient>Ryszard Pieńskowski</klient>
+            <produkt>
+                <id>P010</id>
+                <nazwa>TELEWIZOR OLED SONY A1 77 CALI KD-77A1E +HT-ST5000</nazwa>
+                <kategoria>telewizory</kategoria>
+                <cena>1 x 89999.00 PLN</cena>
+                <suma_częściowa>89999 PLN</suma_częściowa>
+                <vat>20699.77 PLN</vat>
+            </produkt>
+            <suma_końcowa>89999</suma_końcowa>
+            <suma_kwot_vat>20699.77</suma_kwot_vat>
+            <data>2017-11-11</data>
+            <opis>Dostawa w godzinach 15-17</opis>
+        </zamówienie>
+        <zamówienie>
+            <klient>Jan Jacek</klient>
+            <produkt>
+                <id>P011</id>
+                <nazwa>PAS do Pończoch SPÓDNICZKA</nazwa>
+                <kategoria>bielizna_damska</kategoria>
+                <cena>3 x 19.99 PLN</cena>
+                <suma_częściowa>59.97 PLN</suma_częściowa>
+                <vat>13.7931 PLN</vat>
+            </produkt>
+            <suma_końcowa>59.97</suma_końcowa>
+            <suma_kwot_vat>13.7931</suma_kwot_vat>
+            <data>2018-02-14</data>
+            <opis>Zapakować dyskretnie</opis>
+        </zamówienie>
+        <zamówienie>
+            <klient>Janusz Więckowski</klient>
+            <produkt>
+                <id>P003</id>
+                <nazwa>Smartfon XIAOMI Redmi 4X 32GB Czarny</nazwa>
+                <kategoria>smartfony</kategoria>
+                <cena>2 x 658.00 PLN</cena>
+                <suma_częściowa>1316 PLN</suma_częściowa>
+                <vat>302.68 PLN</vat>
+            </produkt>
+            <produkt>
+                <id>P005</id>
+                <nazwa>Samsung Galaxy A8 (2018) szary</nazwa>
+                <kategoria>smartfony</kategoria>
+                <cena>1 x 1849.99 PLN</cena>
+                <suma_częściowa>1849.99 PLN</suma_częściowa>
+                <vat>425.4977 PLN</vat>
+            </produkt>
+            <produkt>
+                <id>P006</id>
+                <nazwa>Laptop ASUS R541UJ i3-6006U 4GB 1TB GF920-2GB W10</nazwa>
+                <kategoria>laptopy</kategoria>
+                <cena>1 x 2099.00 PLN</cena>
+                <suma_częściowa>2099 PLN</suma_częściowa>
+                <vat>482.77 PLN</vat>
+            </produkt>
+            <suma_końcowa>5264.99</suma_końcowa>
+            <suma_kwot_vat>1210.9477</suma_kwot_vat>
+            <data>2018-02-02</data>
+            <opis>OSTROŻNIE</opis>
+        </zamówienie>
+    </zamówienia>
 </sklep>
