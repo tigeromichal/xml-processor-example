@@ -8,7 +8,7 @@ public class Product {
 
     @XmlID
     @XmlAttribute(name = "id", required = true)
-    private long id;
+    private String id;
 
     @XmlIDREF
     @XmlAttribute(name = "kategoria", required = true)
@@ -29,7 +29,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, Category category, String name, Price price, String marked, String unmarked) {
+    public Product(String id, Category category, String name, Price price, String marked, String unmarked) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -38,11 +38,11 @@ public class Product {
         this.unmarked = unmarked;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

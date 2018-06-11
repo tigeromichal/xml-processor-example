@@ -11,12 +11,14 @@ public class Shop {
     private Header header;
 
     @XmlElementWrapper(name = "klienci", required = true)
+    @XmlElement(name = "klient")
     private List<Client> clients;
 
     @XmlElement(name = "oferta", required = true)
     private Offer offer;
 
     @XmlElementWrapper(name = "zamówienia", required = true)
+    @XmlElement(name = "zamówienie")
     private List<Order> orders;
 
     public Shop() {

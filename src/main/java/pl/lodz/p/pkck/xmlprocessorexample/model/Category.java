@@ -8,7 +8,7 @@ public class Category {
 
     @XmlID
     @XmlAttribute(name = "id", required = true)
-    private long id;
+    private String id;
 
     @XmlIDREF
     @XmlAttribute(name = "rodzic", required = false)
@@ -20,17 +20,17 @@ public class Category {
     public Category() {
     }
 
-    public Category(long id, Category parent, String name) {
+    public Category(String id, Category parent, String name) {
         this.id = id;
         this.parent = parent;
         this.name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

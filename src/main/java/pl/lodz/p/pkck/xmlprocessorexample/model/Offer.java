@@ -1,9 +1,6 @@
 package pl.lodz.p.pkck.xmlprocessorexample.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlRootElement(name = "oferta")
@@ -11,9 +8,11 @@ import java.util.List;
 public class Offer {
 
     @XmlElementWrapper(name = "kategorie", required = true)
+    @XmlElement(name = "kategoria")
     private List<Category> categories;
 
     @XmlElementWrapper(name = "produkty", required = true)
+    @XmlElement(name = "produkt_definicja")
     private List<Product> products;
 
     public Offer() {

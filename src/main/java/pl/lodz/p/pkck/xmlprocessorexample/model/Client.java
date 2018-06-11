@@ -8,7 +8,7 @@ public class Client {
 
     @XmlID
     @XmlAttribute(name = "id", required = true)
-    private long id;
+    private String id;
 
     @XmlElement(name = "imię", required = true)
     private String name;
@@ -19,17 +19,17 @@ public class Client {
     public Client() {
     }
 
-    public Client(long id, String name, String lastName) {
+    public Client(String id, String name, String lastName) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,6 +1,9 @@
 package pl.lodz.p.pkck.xmlprocessorexample.model;
 
+import pl.lodz.p.pkck.xmlprocessorexample.utils.LocalDateAdapter;
+
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class Header {
     @XmlElement(name = "miejscowość", required = true)
     private String city;
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @XmlElement(name = "data", required = true)
     private LocalDate date;
 

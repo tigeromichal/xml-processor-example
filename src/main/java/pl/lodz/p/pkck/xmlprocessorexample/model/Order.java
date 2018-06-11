@@ -1,6 +1,9 @@
 package pl.lodz.p.pkck.xmlprocessorexample.model;
 
+import pl.lodz.p.pkck.xmlprocessorexample.utils.LocalDateAdapter;
+
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class Order {
     @XmlElements(@XmlElement(name = "produkt"))
     private ArrayList<ProductOrder> products;
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @XmlElement(name = "data", required = true)
     private LocalDate date;
 
