@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="zamówienia.xslt" ?>
 <sklep>
     <nagłówek>
-        <miejscowość nazwa="Łódź"/>
+        <miejscowość>Łódź</miejscowość>
         <data>2018-04-06</data>
         <autor imię="Szymon" nazwisko="Andrzejczak" nr_indeksu="203847"/>
         <autor imię="Michał" nazwisko="Piasecki" nr_indeksu="203965"/>
