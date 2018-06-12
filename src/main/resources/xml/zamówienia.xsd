@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xa="http://www.w3.org/2001/XMLSchema"
+           xmlns:typy="http://www.example.org/typy" targetNamespace="http://www.example.org/typy"
+           attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xs:element name="sklep">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nagłówek">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" name="miejscowość" type="xs:string">
+                            </xs:element>
+                            <xs:element name="data" type="xs:date"/>
+                            <xs:element name="autor" maxOccurs="2" minOccurs="2" type="typy:autor"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="klienci">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="klient" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:group ref="typy:osoba"/>
+                                    <xs:attribute type="xs:ID" name="id" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="oferta">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="kategorie">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="kategoria" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="nazwa"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="id" use="required">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:ID">
+                                                            <xs:pattern value="KAT[0-9]{3}"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute type="xs:string" name="rodzic" use="optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="produkty">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="produkt_definicja" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="nazwa"/>
+                                                    <xs:element type="typy:cena" name="cena"/>
+                                                    <xs:choice>
+                                                        <xs:element name="wyróżniony">
+                                                            <xs:simpleType>
+                                                                <xs:restriction base="xs:string">
+                                                                    <xa:maxLength value="0"/>
+                                                                </xs:restriction>
+                                                            </xs:simpleType>
+                                                        </xs:element>
+                                                        <xs:element name="niewyróżniony">
+                                                            <xs:simpleType>
+                                                                <xs:restriction base="xs:string">
+                                                                    <xa:maxLength value="0"/>
+                                                                </xs:restriction>
+                                                            </xs:simpleType>
+                                                        </xs:element>
+                                                    </xs:choice>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:ID" name="id" use="required"/>
+                                                <xs:attribute type="xs:IDREF" name="kategoria" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="zamówienia">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="zamówienie" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="produkt" maxOccurs="unbounded" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute type="xs:IDREF" name="id" use="required"/>
+                                                        <xs:attribute type="xs:byte" name="liczba" use="required"/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="data" type="xs:date"/>
+                                        <xs:element type="xs:string" name="opis"/>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:IDREF" name="klient" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="klient_klucz">
+            <xs:selector xpath="klienci/klient"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:key name="kategoria_klucz">
+            <xs:selector xpath="oferta/kategorie/kategoria"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:key name="produkt_definicja_klucz">
+            <xs:selector xpath="oferta/produkty/produkt_definicja"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:keyref name="kategoria_referencja" refer="typy:kategoria_klucz">
+            <xs:selector xpath="oferta/produkty/produkt_definicja"/>
+            <xs:field xpath="@kategoria"/>
+        </xs:keyref>
+        <xs:keyref name="produkt_definicja_referencja" refer="typy:produkt_definicja_klucz">
+            <xs:selector xpath="zamówienia/zamówienie/produkt"/>
+            <xs:field xpath="@id"/>
+        </xs:keyref>
+        <xs:keyref name="klient_referencja" refer="typy:klient_klucz">
+            <xs:selector xpath="zamówienia/zamówienie"/>
+            <xs:field xpath="@klient"/>
+        </xs:keyref>
+    </xs:element>
+
+    <xs:attributeGroup name="autorattr">
+        <xs:attribute type="xs:string" name="imię" use="optional"/>
+        <xs:attribute type="xs:string" name="nazwisko" use="optional"/>
+        <xs:attribute type="xs:int" name="nr_indeksu" use="optional"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="autor">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attributeGroup ref="typy:autorattr"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="cena">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="waluta">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="USD"/>
+                            <xs:enumeration value="PLN"/>
+                            <xs:enumeration value="EUR"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:group name="osoba">
+        <xs:sequence>
+            <xs:element name="imię" type="typy:napis_długi"/>
+            <xs:element name="nazwisko" type="typy:napis_długi"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:simpleType name="napis_długi">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="256"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

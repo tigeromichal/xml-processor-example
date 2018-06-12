@@ -141,7 +141,8 @@
     <Label layoutX="15.0" layoutY="779.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wyjściowego XML"/>
     <TextField fx:id="inputXmlFileNameTextField" layoutX="280.0" layoutY="725.0" prefWidth="250.0"
                text="zamówienia.xml"/>
-    <TextField fx:id="inputXmlSchemaFileNameTextField" layoutX="280.0" layoutY="750.0" prefWidth="250.0"/>
+    <TextField fx:id="inputXmlSchemaFileNameTextField" layoutX="280.0" layoutY="750.0" prefWidth="250.0"
+               text="zamówienia.xsd"/>
     <TextField fx:id="outputXmlFileNameTextField" layoutX="280.0" layoutY="775.0" prefWidth="250.0"
                text="zamówienia-output.xml"/>
     <Button fx:id="loadXmlButton" layoutX="15.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false"

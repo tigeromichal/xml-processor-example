@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet type="text/xsl" href="zamówienia.xslt" ?>
-<sklep>
+<sklep xmlns="http://www.example.org/typy">
     <nagłówek>
         <miejscowość>Łódź</miejscowość>
         <data>2018-04-06</data>
@@ -53,7 +52,6 @@
         <kategorie>
             <kategoria id="KAT001">
                 <nazwa>elektronika</nazwa>
-                <vat>23</vat>
             </kategoria>
             <kategoria id="KAT002" rodzic="KAT001">
                 <nazwa>audio</nazwa>
@@ -69,7 +67,6 @@
             </kategoria>
             <kategoria id="KAT006">
                 <nazwa>zdrowie_i_uroda</nazwa>
-                <vat>23</vat>
             </kategoria>
             <kategoria id="KAT007" rodzic="KAT006">
                 <nazwa>suplementy_diety</nazwa>
@@ -82,7 +79,6 @@
             </kategoria>
             <kategoria id="KAT010">
                 <nazwa>moda</nazwa>
-                <vat>23</vat>
             </kategoria>
             <kategoria id="KAT011" rodzic="KAT010">
                 <nazwa>obuwie</nazwa>

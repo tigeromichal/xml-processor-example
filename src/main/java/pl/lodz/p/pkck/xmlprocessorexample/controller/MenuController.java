@@ -141,11 +141,12 @@ public class MenuController extends Controller {
         editProductButton.setOnAction(event -> editProduct());
         removeProductButton.setOnAction(event -> removeProduct());
 
-        loadXmlButton.fire();
+        //loadXmlButton.fire();
     }
 
     private void loadXml() {
-        ShopXmlFileDao dao = new ShopXmlFileDao();
+        String inputXmlSchemaFileName = inputXmlSchemaFileNameTextField.getText();
+        ShopXmlFileDao dao = new ShopXmlFileDao("/src/main/resources/xml/" + inputXmlSchemaFileName);
         String inputXmlFileName = inputXmlFileNameTextField.getText();
         try {
             shop = dao.read("/src/main/resources/xml/" + inputXmlFileName);
@@ -155,7 +156,8 @@ public class MenuController extends Controller {
     }
 
     private void saveXml() {
-        ShopXmlFileDao dao = new ShopXmlFileDao();
+        String inputXmlSchemaFileName = inputXmlSchemaFileNameTextField.getText();
+        ShopXmlFileDao dao = new ShopXmlFileDao("/src/main/resources/xml/" + inputXmlSchemaFileName);
         String outputXmlFileName = outputXmlFileNameTextField.getText();
         try {
             dao.write(shop, "/src/main/resources/xml/" + outputXmlFileName);
