@@ -85,10 +85,6 @@ public class MenuController extends Controller {
     @FXML
     private ChoiceBox orderClientChoiceBox;
     @FXML
-    private ChoiceBox orderProductChoiceBox;
-    @FXML
-    private TextField orderNumberTextField;
-    @FXML
     private TextField orderDateTextField;
     @FXML
     private TextArea orderDescriptionTextArea;
@@ -98,6 +94,18 @@ public class MenuController extends Controller {
     private Button editOrderButton;
     @FXML
     private Button removeOrderButton;
+    @FXML
+    private ListView productsInOrderListView;
+    @FXML
+    private ChoiceBox orderProductChoiceBox;
+    @FXML
+    private TextField orderNumberTextField;
+    @FXML
+    private Button addProductToOrderButton;
+    @FXML
+    private Button editProductNumberButton;
+    @FXML
+    private Button removeProductFromOrderButton;
     @FXML
     private TextField inputXmlFileNameTextField;
     @FXML
@@ -116,7 +124,8 @@ public class MenuController extends Controller {
     private TextField outputPdfFileNameTextField;
     @FXML
     private Button savePdfButton;
-
+    @FXML
+    private Label errorsLabel;
 
     private Shop shop = new Shop();
 
@@ -127,6 +136,7 @@ public class MenuController extends Controller {
         initializeCategoriesListView();
         initializeProductsListView();
         initializeOrdersListView();
+        initializeProductsInOrderListView();
 
         loadXmlButton.setOnAction(event -> {
             loadXml();
@@ -150,6 +160,14 @@ public class MenuController extends Controller {
         addProductButton.setOnAction(event -> addProduct());
         editProductButton.setOnAction(event -> editProduct());
         removeProductButton.setOnAction(event -> removeProduct());
+        addOrderButton.setOnAction(event -> addOrder());
+        editOrderButton.setOnAction(event -> editOrder());
+        removeOrderButton.setOnAction(event -> removeOrder());
+        addProductToOrderButton.setOnAction(event -> addProductToOrder());
+        editProductNumberButton.setOnAction(event -> editProductNumber());
+        removeProductFromOrderButton.setOnAction(event -> removeProductFromOrder());
+
+        errorsLabel.setWrapText(true);
 
         //loadXmlButton.fire();
     }
@@ -219,6 +237,7 @@ public class MenuController extends Controller {
                 .map(Product::toString)
                 .collect(Collectors.toList()));
         productsListView.setItems(productsStringObservableList);
+        orderProductChoiceBox.setItems(productsStringObservableList);
     }
 
     private void updateOrdersListViews() {
@@ -226,6 +245,20 @@ public class MenuController extends Controller {
                 .stream()
                 .map(Order::toString)
                 .collect(Collectors.toList())));
+    }
+
+    private void updateProductsInOrderListViews() {
+        if (ordersListView.getSelectionModel().getSelectedIndex() >= 0) {
+            ObservableList<String> productsInOrderObservableList = FXCollections.observableArrayList(
+                    shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex())
+                            .getProducts()
+                            .stream()
+                            .map(Object::toString)
+                            .collect(Collectors.toList()));
+            productsInOrderListView.setItems(productsInOrderObservableList);
+        } else {
+            ordersListView.getItems().clear();
+        }
     }
 
     private void updateShopWithGuiData() {
@@ -318,6 +351,26 @@ public class MenuController extends Controller {
                 orderDateTextField.clear();
                 orderDescriptionTextArea.clear();
             }
+            updateProductsInOrderListViews();
+        });
+    }
+
+    private void initializeProductsInOrderListView() {
+        productsInOrderListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() >= 0) {
+                ProductOrder selectedProductOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex())
+                        .getProducts().get(newValue.intValue());
+                int productIndex = IntStream.range(0, shop.getOffer().getProducts().size())
+                        .filter(i -> shop.getOffer().getProducts().get(i).getId().equals(selectedProductOrder.getProduct().getId()))
+                        .findFirst().getAsInt();
+                orderProductChoiceBox.getSelectionModel().select(productIndex);
+                orderNumberTextField.setText(Integer.toString(selectedProductOrder.getNumber()));
+            } else {
+                orderClientChoiceBox.getSelectionModel().clearSelection();
+                orderDateTextField.clear();
+                orderDescriptionTextArea.clear();
+            }
+            updateProductsInOrderListViews();
         });
     }
 
@@ -426,15 +479,44 @@ public class MenuController extends Controller {
         updateProductsListViews();
     }
 
+    private void addOrder() {
+
+    }
+
+    private void editOrder() {
+
+    }
+
+    private void removeOrder() {
+
+    }
+
+    private void addProductToOrder() {
+
+    }
+
+    private void editProductNumber() {
+
+    }
+
+    private void removeProductFromOrder() {
+
+    }
+
     private void savePdf() {
         String inputXmlFilePath = "/src/main/resources/xml/" + inputXmlFileNameTextField2.getText();
         String xsltFilePath = "/src/main/resources/xml/" + xsltFileNameTextField.getText();
         String outputPdfFilePath = "/src/main/resources/xml/" + outputPdfFileNameTextField.getText();
         FopPdfConverter converter = new FopPdfConverter();
-        converter.write(inputXmlFilePath, xsltFilePath, outputPdfFilePath);
+        try {
+            converter.write(inputXmlFilePath, xsltFilePath, outputPdfFilePath);
+        } catch (Exception e) {
+            handleException(e);
+        }
     }
 
     private void handleException(Exception e) {
+        errorsLabel.setText(e.getMessage());
         log.error(e.getMessage(), e);
     }
 
