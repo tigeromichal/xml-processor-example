@@ -7,130 +7,162 @@
 <AnchorPane prefHeight="900.0" prefWidth="1340.0" stylesheets="@style/menuScene.css"
             xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.lodz.p.pkck.xmlprocessorexample.controller.MenuController">
-    <children>
-        <ListView layoutX="280.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
-        <Label layoutX="280.0" layoutY="15.0" prefWidth="250.0" text="Klienci" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <TextField layoutX="380.0" layoutY="465.0" prefWidth="150.0"/>
-        <Label layoutX="280.0" layoutY="469.0" prefWidth="85.0" text="Imię"/>
-        <TextField layoutX="380.0" layoutY="490.0" prefWidth="150.0"/>
-        <Label layoutX="280.0" layoutY="494.0" prefHeight="17.0" prefWidth="85.0" text="Nazwisko"/>
-        <ListView layoutX="15.0" layoutY="150.0" prefHeight="300.0" prefWidth="250.0"/>
-        <ListView layoutX="545.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
-        <Label layoutX="545.0" layoutY="15.0" prefWidth="250.0" text="Kategorie" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <ListView layoutX="810.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
-        <Label layoutX="810.0" layoutY="15.0" prefWidth="250.0" text="Produkty" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <ChoiceBox layoutX="645.0" layoutY="465.0" prefWidth="150.0"/>
-        <Label layoutX="545.0" layoutY="469.0" prefWidth="85.0" text="Rodzic"/>
-        <Label layoutX="545.0" layoutY="494.0" prefWidth="85.0" text="Nazwa"/>
-        <TextField layoutX="645.0" layoutY="490.0" prefWidth="150.0"/>
-        <Button layoutX="545.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0" text="Dodaj kategorię"/>
-        <Button layoutX="545.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Edytuj kategorię"/>
-        <Button layoutX="545.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Usuń kategorię"/>
-        <Label layoutX="810.0" layoutY="469.0" prefWidth="85.0" text="Kategoria"/>
-        <ChoiceBox layoutX="910.0" layoutY="465.0" prefWidth="150.0"/>
-        <Label layoutX="810.0" layoutY="494.0" prefWidth="85.0" text="Nazwa"/>
-        <TextField layoutX="910.0" layoutY="490.0" prefWidth="150.0"/>
-        <Label layoutX="810.0" layoutY="519.0" prefWidth="85.0" text="Cena"/>
-        <TextField layoutX="910.0" layoutY="515.0" prefWidth="150.0"/>
-        <Label layoutX="810.0" layoutY="544.0" prefWidth="85.0" text="Waluta"/>
-        <TextField layoutX="910.0" layoutY="540.0" prefWidth="150.0"/>
-        <Label layoutX="810.0" layoutY="569.0" prefWidth="85.0" text="Wyróżniony"/>
-        <RadioButton layoutX="910.0" layoutY="569.0" mnemonicParsing="false"/>
-        <Button layoutX="810.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0" text="Dodaj produkt"/>
-        <Button layoutX="810.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Edytuj produkt"/>
-        <Button layoutX="810.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Usuń produkt"/>
-        <ListView layoutX="1075.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
-        <Label layoutX="1075.0" layoutY="15.0" prefWidth="250.0" text="Zamówienia" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <Label layoutX="1075.0" layoutY="469.0" prefWidth="85.0" text="Klient"/>
-        <ChoiceBox layoutX="1175.0" layoutY="465.0" prefWidth="150.0"/>
-        <Label layoutX="1075.0" layoutY="494.0" prefWidth="85.0" text="Produkt"/>
-        <ChoiceBox layoutX="1175.0" layoutY="490.0" prefWidth="150.0"/>
-        <Label layoutX="1075.0" layoutY="519.0" prefWidth="85.0" text="Liczba"/>
-        <TextField layoutX="1175.0" layoutY="515.0" prefWidth="150.0"/>
-        <Label layoutX="1075.0" layoutY="569.0" prefWidth="85.0" text="Opis"/>
-        <TextArea layoutX="1175.0" layoutY="565.0" prefHeight="50.0" prefWidth="150.0"/>
-        <Button layoutX="1075.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0" text="Dodaj zamówienie"/>
-        <Button layoutX="1075.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Edytuj zamówienie"/>
-        <Button layoutX="1075.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Usuń zamówienie"/>
-        <Label layoutX="1075.0" layoutY="544.0" prefWidth="85.0" text="Data"/>
-        <TextField layoutX="1175.0" layoutY="540.0" prefWidth="150.0"/>
-        <Label layoutX="15.0" layoutY="54.0" prefWidth="85.0" text="Miejscowość"/>
-        <TextField layoutX="115.0" layoutY="50.0" prefWidth="150.0"/>
-        <Label layoutX="15.0" layoutY="79.0" prefWidth="85.0" text="Data"/>
-        <TextField layoutX="115.0" layoutY="75.0" prefWidth="150.0"/>
-        <Label layoutX="15.0" layoutY="115.0" prefWidth="250.0" text="Autorzy" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <Label layoutX="15.0" layoutY="469.0" prefWidth="85.0" text="Imię"/>
-        <Label layoutX="15.0" layoutY="494.0" prefHeight="17.0" prefWidth="85.0" text="Nazwisko"/>
-        <TextField layoutX="115.0" layoutY="465.0" prefWidth="150.0"/>
-        <TextField layoutX="115.0" layoutY="490.0" prefWidth="150.0"/>
-        <Label layoutX="15.0" layoutY="519.0" prefHeight="17.0" prefWidth="85.0" text="Numer indeksu"/>
-        <TextField layoutX="115.0" layoutY="515.0" prefWidth="150.0"/>
-        <Label layoutX="15.0" layoutY="15.0" prefWidth="250.0" text="Nagłówek" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="12.0"/>
-            </font>
-        </Label>
-        <TextField layoutX="280.0" layoutY="725.0" prefWidth="250.0"/>
-        <Label layoutX="15.0" layoutY="729.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wejściowego XML"/>
-        <Line endX="1310.0" layoutX="15.0" layoutY="710.0"/>
-        <Label layoutX="15.0" layoutY="754.0" prefHeight="17.0" prefWidth="250.0"
-               text="Nazwa pliku wejściowego XML Schema"/>
-        <TextField layoutX="280.0" layoutY="750.0" prefWidth="250.0"/>
-        <TextField layoutX="280.0" layoutY="775.0" prefWidth="250.0"/>
-        <Label layoutX="15.0" layoutY="779.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wyjściowego XML"/>
-        <Button layoutX="15.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false" prefWidth="250.0"
-                text="Wczytaj XML">
-            <font>
-                <Font size="16.0"/>
-            </font>
-        </Button>
-        <Button layoutX="280.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false" prefWidth="250.0"
-                text="Zapisz XML">
-            <font>
-                <Font size="16.0"/>
-            </font>
-        </Button>
-        <Button layoutX="545.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false" prefWidth="250.0"
-                text="Zapisz jako PDF">
-            <font>
-                <Font size="16.0"/>
-            </font>
-        </Button>
-        <Button layoutX="15.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0" text="Dodaj autora"/>
-        <Button layoutX="15.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Edytuj autora"/>
-        <Button layoutX="15.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Usuń autora"/>
-        <Button layoutX="280.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0" text="Dodaj klienta"/>
-        <Button layoutX="280.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Edytuj klienta"/>
-        <Button layoutX="280.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="250.0"
-                text="Usuń klienta"/>
-    </children>
+
+    <!-- HEADER -->
+    <Label layoutX="15.0" layoutY="15.0" prefWidth="250.0" text="Nagłówek" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <Label layoutX="15.0" layoutY="54.0" prefWidth="85.0" text="Miejscowość"/>
+    <Label layoutX="15.0" layoutY="79.0" prefWidth="85.0" text="Data"/>
+    <TextField fx:id="headerCityTextField" layoutX="115.0" layoutY="50.0" prefWidth="150.0"/>
+    <TextField fx:id="headerDateTextField" layoutX="115.0" layoutY="75.0" prefWidth="150.0"/>
+
+    <!-- AUTHORS -->
+    <Label layoutX="15.0" layoutY="115.0" prefWidth="250.0" text="Autorzy" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <ListView fx:id="authorsListView" layoutX="15.0" layoutY="150.0" prefHeight="300.0" prefWidth="250.0"/>
+    <Label layoutX="15.0" layoutY="469.0" prefWidth="85.0" text="Imię"/>
+    <Label layoutX="15.0" layoutY="494.0" prefHeight="17.0" prefWidth="85.0" text="Nazwisko"/>
+    <Label layoutX="15.0" layoutY="519.0" prefHeight="17.0" prefWidth="85.0" text="Numer indeksu"/>
+    <TextField fx:id="authorNameTextField" layoutX="115.0" layoutY="465.0" prefWidth="150.0"/>
+    <TextField fx:id="authorLastNameTextField" layoutX="115.0" layoutY="490.0" prefWidth="150.0"/>
+    <TextField fx:id="authorIndexNumberTextField" layoutX="115.0" layoutY="515.0" prefWidth="150.0"/>
+    <Button fx:id="addAuthorButton" layoutX="15.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+            text="Dodaj autora"/>
+    <Button fx:id="editAuthorButton" layoutX="15.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Edytuj autora"/>
+    <Button fx:id="removeAuthorButton" layoutX="15.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Usuń autora"/>
+
+    <!-- CLIENTS -->
+    <Label layoutX="280.0" layoutY="15.0" prefWidth="250.0" text="Klienci" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <ListView fx:id="clientsListView" layoutX="280.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
+    <Label layoutX="280.0" layoutY="469.0" prefWidth="85.0" text="Imię"/>
+    <Label layoutX="280.0" layoutY="494.0" prefHeight="17.0" prefWidth="85.0" text="Nazwisko"/>
+    <TextField fx:id="clientNameTextField" layoutX="380.0" layoutY="465.0" prefWidth="150.0"/>
+    <TextField fx:id="clientLastNameTextField" layoutX="380.0" layoutY="490.0" prefWidth="150.0"/>
+    <Button fx:id="addClientButton" layoutX="280.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+            text="Dodaj klienta"/>
+    <Button fx:id="editClientButton" layoutX="280.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Edytuj klienta"/>
+    <Button fx:id="removeClientButton" layoutX="280.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Usuń klienta"/>
+
+    <!-- CATEGORIES -->
+    <Label layoutX="545.0" layoutY="15.0" prefWidth="250.0" text="Kategorie" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <ListView fx:id="categoriesListView" layoutX="545.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
+    <Label layoutX="545.0" layoutY="469.0" prefWidth="85.0" text="Rodzic"/>
+    <Label layoutX="545.0" layoutY="494.0" prefWidth="85.0" text="Nazwa"/>
+    <ChoiceBox fx:id="categoryParentChoiceBox" layoutX="645.0" layoutY="465.0" prefWidth="150.0"/>
+    <TextField fx:id="categoryNameTextField" layoutX="645.0" layoutY="490.0" prefWidth="150.0"/>
+    <Button fx:id="addCategoryButton" layoutX="545.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+            text="Dodaj kategorię"/>
+    <Button fx:id="editCategoryButton" layoutX="545.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Edytuj kategorię"/>
+    <Button fx:id="removeCategoryButton" layoutX="545.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Usuń kategorię"/>
+
+    <!-- PRODUCTS -->
+    <Label layoutX="810.0" layoutY="15.0" prefWidth="250.0" text="Produkty" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <ListView fx:id="productsListView" layoutX="810.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
+    <Label layoutX="810.0" layoutY="469.0" prefWidth="85.0" text="Kategoria"/>
+    <Label layoutX="810.0" layoutY="494.0" prefWidth="85.0" text="Nazwa"/>
+    <Label layoutX="810.0" layoutY="519.0" prefWidth="85.0" text="Cena"/>
+    <Label layoutX="810.0" layoutY="544.0" prefWidth="85.0" text="Waluta"/>
+    <Label layoutX="810.0" layoutY="569.0" prefWidth="85.0" text="Wyróżniony"/>
+    <ChoiceBox fx:id="productCategoryChoiceBox" layoutX="910.0" layoutY="465.0" prefWidth="150.0"/>
+    <TextField fx:id="productNameTextField" layoutX="910.0" layoutY="490.0" prefWidth="150.0"/>
+    <TextField fx:id="productPriceTextField" layoutX="910.0" layoutY="515.0" prefWidth="150.0"/>
+    <TextField fx:id="productCurrencyTextField" layoutX="910.0" layoutY="540.0" prefWidth="150.0"/>
+    <RadioButton fx:id="productMarkedRadioButton" layoutX="910.0" layoutY="569.0" mnemonicParsing="false"/>
+    <Button fx:id="addProductButton" layoutX="810.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+            text="Dodaj produkt"/>
+    <Button fx:id="editProductButton" layoutX="810.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Edytuj produkt"/>
+    <Button fx:id="removeProductButton" layoutX="810.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Usuń produkt"/>
+
+    <!-- ORDERS -->
+    <Label layoutX="1075.0" layoutY="15.0" prefWidth="250.0" text="Zamówienia" textAlignment="CENTER">
+        <font>
+            <Font name="System Bold" size="12.0"/>
+        </font>
+    </Label>
+    <ListView layoutX="1075.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
+    <Label layoutX="1075.0" layoutY="469.0" prefWidth="85.0" text="Klient"/>
+    <Label layoutX="1075.0" layoutY="494.0" prefWidth="85.0" text="Produkt"/>
+    <Label layoutX="1075.0" layoutY="519.0" prefWidth="85.0" text="Liczba"/>
+    <Label layoutX="1075.0" layoutY="544.0" prefWidth="85.0" text="Data"/>
+    <Label layoutX="1075.0" layoutY="569.0" prefWidth="85.0" text="Opis"/>
+    <ChoiceBox fx:id="orderClientChoiceBox" layoutX="1175.0" layoutY="465.0" prefWidth="150.0"/>
+    <ChoiceBox fx:id="orderProductChoiceBox" layoutX="1175.0" layoutY="490.0" prefWidth="150.0"/>
+    <TextField fx:id="orderNumberTextField" layoutX="1175.0" layoutY="515.0" prefWidth="150.0"/>
+    <TextField fx:id="orderDateTextField" layoutX="1175.0" layoutY="540.0" prefWidth="150.0"/>
+    <TextArea fx:id="orderDescriptionTextField" layoutX="1175.0" layoutY="565.0" prefHeight="50.0" prefWidth="150.0"/>
+    <Button fx:id="addOrderButton" layoutX="1075.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+            text="Dodaj zamówienie"/>
+    <Button fx:id="editOrderButton" layoutX="1075.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Edytuj zamówienie"/>
+    <Button fx:id="removeOrderButton" layoutX="1075.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="250.0"
+            text="Usuń zamówienie"/>
+
+    <Line endX="1310.0" layoutX="15.0" layoutY="710.0"/>
+
+    <Label layoutX="15.0" layoutY="729.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wejściowego XML"/>
+    <Label layoutX="15.0" layoutY="754.0" prefHeight="17.0" prefWidth="250.0"
+           text="Nazwa pliku wejściowego XML Schema"/>
+    <Label layoutX="15.0" layoutY="779.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wyjściowego XML"/>
+    <TextField fx:id="inputXmlFileNameTextField" layoutX="280.0" layoutY="725.0" prefWidth="250.0"/>
+    <TextField fx:id="inputXmlSchemaFileNameTextField" layoutX="280.0" layoutY="750.0" prefWidth="250.0"/>
+    <TextField fx:id="outputXmlFileNameTextField" layoutX="280.0" layoutY="775.0" prefWidth="250.0"/>
+    <Button fx:id="loadXmlButton" layoutX="15.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false"
+            prefWidth="250.0"
+            text="Wczytaj XML">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Button>
+    <Button fx:id="saveXmlButton" layoutX="280.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false"
+            prefWidth="250.0"
+            text="Zapisz XML">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Button>
+    <Button fx:id="savePdfButton" layoutX="545.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false"
+            prefWidth="250.0"
+            text="Zapisz jako PDF">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Button>
+
+
 </AnchorPane>
