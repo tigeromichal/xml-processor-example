@@ -17,6 +17,7 @@ import java.io.File;
 public class ShopXmlFileDao implements Dao<Shop> {
 
     Logger log = LoggerFactory.getLogger(ShopXmlFileDao.class);
+
     private String xmlSchemaPath;
 
     public ShopXmlFileDao(final String xmlSchemaPath) {

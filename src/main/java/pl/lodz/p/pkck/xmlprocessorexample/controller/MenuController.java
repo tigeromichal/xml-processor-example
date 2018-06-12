@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.lodz.p.pkck.xmlprocessorexample.converter.FopPdfConverter;
 import pl.lodz.p.pkck.xmlprocessorexample.dao.ShopXmlFileDao;
 import pl.lodz.p.pkck.xmlprocessorexample.model.*;
 
@@ -107,6 +108,14 @@ public class MenuController extends Controller {
     private Button loadXmlButton;
     @FXML
     private Button saveXmlButton;
+    @FXML
+    private TextField inputXmlFileNameTextField2;
+    @FXML
+    private TextField xsltFileNameTextField;
+    @FXML
+    private TextField outputPdfFileNameTextField;
+    @FXML
+    private Button savePdfButton;
 
 
     private Shop shop = new Shop();
@@ -127,6 +136,7 @@ public class MenuController extends Controller {
             updateShopWithGuiData();
             saveXml();
         });
+        savePdfButton.setOnAction(event -> savePdf());
 
         addAuthorButton.setOnAction(event -> addAuthor());
         editAuthorButton.setOnAction(event -> editAuthor());
@@ -414,6 +424,14 @@ public class MenuController extends Controller {
         Product selectedProduct = shop.getOffer().getProducts().get(productsListView.getSelectionModel().getSelectedIndex());
         shop.getOffer().getProducts().remove(selectedProduct);
         updateProductsListViews();
+    }
+
+    private void savePdf() {
+        String inputXmlFilePath = "/src/main/resources/xml/" + inputXmlFileNameTextField2.getText();
+        String xsltFilePath = "/src/main/resources/xml/" + xsltFileNameTextField.getText();
+        String outputPdfFilePath = "/src/main/resources/xml/" + outputPdfFileNameTextField.getText();
+        FopPdfConverter converter = new FopPdfConverter();
+        converter.write(inputXmlFilePath, xsltFilePath, outputPdfFilePath);
     }
 
     private void handleException(Exception e) {
