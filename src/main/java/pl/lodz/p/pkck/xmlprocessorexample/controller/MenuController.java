@@ -1,6 +1,7 @@
 package pl.lodz.p.pkck.xmlprocessorexample.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.slf4j.Logger;
@@ -127,6 +128,19 @@ public class MenuController extends Controller {
             saveXml();
         });
 
+        addAuthorButton.setOnAction(event -> addAuthor());
+        editAuthorButton.setOnAction(event -> editAuthor());
+        removeAuthorButton.setOnAction(event -> removeAuthor());
+        addClientButton.setOnAction(event -> addClient());
+        editClientButton.setOnAction(event -> editClient());
+        removeClientButton.setOnAction(event -> removeClient());
+        addCategoryButton.setOnAction(event -> addCategory());
+        editCategoryButton.setOnAction(event -> editCategory());
+        removeCategoryButton.setOnAction(event -> removeCategory());
+        addProductButton.setOnAction(event -> addProduct());
+        editProductButton.setOnAction(event -> editProduct());
+        removeProductButton.setOnAction(event -> removeProduct());
+
         loadXmlButton.fire();
     }
 
@@ -154,46 +168,52 @@ public class MenuController extends Controller {
         headerCityTextField.setText(shop.getHeader().getCity());
         headerDateTextField.setText(shop.getHeader().getDate().toString());
 
+        updateAuthorsListViews();
+        updateClientsListViews();
+        updateCategoriesListViews();
+        updateProductsListViews();
+        updateOrdersListViews();
+    }
+
+    private void updateAuthorsListViews() {
         authorsListView.setItems(FXCollections.observableArrayList(shop.getHeader().getAuthors()
                 .stream()
                 .map(Author::toString)
                 .collect(Collectors.toList())));
+    }
 
-        clientsListView.setItems(FXCollections.observableArrayList(shop.getClients()
+    private void updateClientsListViews() {
+        ObservableList<String> clientsStringObservableList = FXCollections.observableArrayList(shop.getClients()
                 .stream()
                 .map(Client::toString)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
+        clientsListView.setItems(clientsStringObservableList);
+        orderClientChoiceBox.setItems(clientsStringObservableList);
+    }
 
-        categoriesListView.setItems(FXCollections.observableArrayList(shop.getOffer().getCategories()
+    private void updateCategoriesListViews() {
+        ObservableList<String> categoriesStringObservableList = FXCollections.observableArrayList(shop.getOffer().getCategories()
                 .stream()
                 .map(Category::toString)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
+        categoriesListView.setItems(categoriesStringObservableList);
+        categoryParentChoiceBox.setItems(categoriesStringObservableList);
+        productCategoryChoiceBox.setItems(categoriesStringObservableList);
+    }
 
-        categoryParentChoiceBox.setItems(FXCollections.observableArrayList(shop.getOffer().getCategories()
-                .stream()
-                .map(Category::toString)
-                .collect(Collectors.toList())));
-
-        productsListView.setItems(FXCollections.observableArrayList(shop.getOffer().getProducts()
+    private void updateProductsListViews() {
+        ObservableList<String> productsStringObservableList = FXCollections.observableArrayList(shop.getOffer().getProducts()
                 .stream()
                 .map(Product::toString)
-                .collect(Collectors.toList())));
+                .collect(Collectors.toList()));
+        productsListView.setItems(productsStringObservableList);
+    }
 
-        productCategoryChoiceBox.setItems(FXCollections.observableArrayList(shop.getOffer().getCategories()
-                .stream()
-                .map(Category::toString)
-                .collect(Collectors.toList())));
-
+    private void updateOrdersListViews() {
         ordersListView.setItems(FXCollections.observableArrayList(shop.getOrders()
                 .stream()
                 .map(Order::toString)
                 .collect(Collectors.toList())));
-
-        orderClientChoiceBox.setItems(FXCollections.observableArrayList(shop.getClients()
-                .stream()
-                .map(Client::toString)
-                .collect(Collectors.toList())));
-
     }
 
     private void updateShopWithGuiData() {
@@ -203,31 +223,47 @@ public class MenuController extends Controller {
 
     private void initializeAuthorsListView() {
         authorsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            Author selectedAuthor = shop.getHeader().getAuthors().get(newValue.intValue());
-            authorNameTextField.setText(selectedAuthor.getName());
-            authorLastNameTextField.setText(selectedAuthor.getLastName());
-            authorIndexNumberTextField.setText(selectedAuthor.getIndexNumber());
+            if (newValue.intValue() >= 0) {
+                Author selectedAuthor = shop.getHeader().getAuthors().get(newValue.intValue());
+                authorNameTextField.setText(selectedAuthor.getName());
+                authorLastNameTextField.setText(selectedAuthor.getLastName());
+                authorIndexNumberTextField.setText(selectedAuthor.getIndexNumber());
+            } else {
+                authorNameTextField.clear();
+                authorLastNameTextField.clear();
+                authorIndexNumberTextField.clear();
+            }
         });
     }
 
     private void initializeClientsListView() {
         clientsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            Client selectedClient = shop.getClients().get(newValue.intValue());
-            clientNameTextField.setText(selectedClient.getName());
-            clientLastNameTextField.setText(selectedClient.getLastName());
+            if (newValue.intValue() >= 0) {
+                Client selectedClient = shop.getClients().get(newValue.intValue());
+                clientNameTextField.setText(selectedClient.getName());
+                clientLastNameTextField.setText(selectedClient.getLastName());
+            } else {
+                clientNameTextField.clear();
+                clientLastNameTextField.clear();
+            }
         });
     }
 
     private void initializeCategoriesListView() {
         categoriesListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            Category selectedCategory = shop.getOffer().getCategories().get(newValue.intValue());
-            categoryNameTextField.setText(selectedCategory.getName());
-            if (selectedCategory.getParent() != null) {
-                int parentIndex = IntStream.range(0, shop.getOffer().getCategories().size())
-                        .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedCategory.getParent().getId()))
-                        .findFirst().getAsInt();
-                categoryParentChoiceBox.getSelectionModel().select(parentIndex);
+            if (newValue.intValue() >= 0) {
+                Category selectedCategory = shop.getOffer().getCategories().get(newValue.intValue());
+                categoryNameTextField.setText(selectedCategory.getName());
+                if (selectedCategory.getParent() != null) {
+                    int parentIndex = IntStream.range(0, shop.getOffer().getCategories().size())
+                            .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedCategory.getParent().getId()))
+                            .findFirst().getAsInt();
+                    categoryParentChoiceBox.getSelectionModel().select(parentIndex);
+                } else {
+                    categoryParentChoiceBox.getSelectionModel().clearSelection();
+                }
             } else {
+                categoryNameTextField.clear();
                 categoryParentChoiceBox.getSelectionModel().clearSelection();
             }
         });
@@ -235,28 +271,147 @@ public class MenuController extends Controller {
 
     private void initializeProductsListView() {
         productsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            Product selectedProduct = shop.getOffer().getProducts().get(newValue.intValue());
-            productNameTextField.setText(selectedProduct.getName());
-            int categoryIndex = IntStream.range(0, shop.getOffer().getCategories().size())
-                    .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedProduct.getCategory().getId()))
-                    .findFirst().getAsInt();
-            productCategoryChoiceBox.getSelectionModel().select(categoryIndex);
-            productPriceTextField.setText(Double.toString(selectedProduct.getPrice().getValue()));
-            productCurrencyTextField.setText(selectedProduct.getPrice().getCurrency());
-            productMarkedRadioButton.selectedProperty().setValue(selectedProduct.getMarked() != null);
+            if (newValue.intValue() >= 0) {
+                Product selectedProduct = shop.getOffer().getProducts().get(newValue.intValue());
+                productNameTextField.setText(selectedProduct.getName());
+                int categoryIndex = IntStream.range(0, shop.getOffer().getCategories().size())
+                        .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedProduct.getCategory().getId()))
+                        .findFirst().getAsInt();
+                productCategoryChoiceBox.getSelectionModel().select(categoryIndex);
+                productPriceTextField.setText(Double.toString(selectedProduct.getPrice().getValue()));
+                productCurrencyTextField.setText(selectedProduct.getPrice().getCurrency());
+                productMarkedRadioButton.selectedProperty().setValue(selectedProduct.getMarked() != null);
+            } else {
+                productNameTextField.clear();
+                productCategoryChoiceBox.getSelectionModel().clearSelection();
+                productPriceTextField.clear();
+                productCurrencyTextField.clear();
+                productMarkedRadioButton.setSelected(false);
+            }
         });
     }
 
     private void initializeOrdersListView() {
         ordersListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            Order selectedOrder = shop.getOrders().get(newValue.intValue());
-            int clientIndex = IntStream.range(0, shop.getClients().size())
-                    .filter(i -> shop.getClients().get(i).getId().equals(selectedOrder.getClient().getId()))
-                    .findFirst().getAsInt();
-            orderClientChoiceBox.getSelectionModel().select(clientIndex);
-            orderDateTextField.setText(selectedOrder.getDate().toString());
-            orderDescriptionTextArea.setText(selectedOrder.getDescription());
+            if (newValue.intValue() >= 0) {
+                Order selectedOrder = shop.getOrders().get(newValue.intValue());
+                int clientIndex = IntStream.range(0, shop.getClients().size())
+                        .filter(i -> shop.getClients().get(i).getId().equals(selectedOrder.getClient().getId()))
+                        .findFirst().getAsInt();
+                orderClientChoiceBox.getSelectionModel().select(clientIndex);
+                orderDateTextField.setText(selectedOrder.getDate().toString());
+                orderDescriptionTextArea.setText(selectedOrder.getDescription());
+            } else {
+                orderClientChoiceBox.getSelectionModel().clearSelection();
+                orderDateTextField.clear();
+                orderDescriptionTextArea.clear();
+            }
         });
+    }
+
+    private void addAuthor() {
+        Author newAuthor = new Author();
+        newAuthor.setName(authorNameTextField.getText());
+        newAuthor.setLastName(authorLastNameTextField.getText());
+        newAuthor.setIndexNumber(authorIndexNumberTextField.getText());
+        shop.getHeader().getAuthors().add(newAuthor);
+        updateAuthorsListViews();
+    }
+
+    private void editAuthor() {
+        Author selectedAuthor = shop.getHeader().getAuthors().get(authorsListView.getSelectionModel().getSelectedIndex());
+        selectedAuthor.setName(authorNameTextField.getText());
+        selectedAuthor.setLastName(authorLastNameTextField.getText());
+        selectedAuthor.setIndexNumber(authorIndexNumberTextField.getText());
+        updateAuthorsListViews();
+    }
+
+    private void removeAuthor() {
+        Author selectedAuthor = shop.getHeader().getAuthors().get(authorsListView.getSelectionModel().getSelectedIndex());
+        shop.getHeader().getAuthors().remove(selectedAuthor);
+        updateAuthorsListViews();
+    }
+
+    private void addClient() {
+        Client newClient = new Client();
+        newClient.setId("K" + String.format("%03d", shop.getClients().size() + 1));
+        newClient.setName(clientNameTextField.getText());
+        newClient.setLastName(clientLastNameTextField.getText());
+        shop.getClients().add(newClient);
+        updateClientsListViews();
+    }
+
+    private void editClient() {
+        Client selectedClient = shop.getClients().get(clientsListView.getSelectionModel().getSelectedIndex());
+        selectedClient.setName(clientNameTextField.getText());
+        selectedClient.setLastName(clientLastNameTextField.getText());
+        updateClientsListViews();
+    }
+
+    private void removeClient() {
+        Client selectedClient = shop.getClients().get(clientsListView.getSelectionModel().getSelectedIndex());
+        shop.getClients().remove(selectedClient);
+        updateClientsListViews();
+    }
+
+    private void addCategory() {
+        Category newCategory = new Category();
+        newCategory.setId("KAT" + String.format("%03d", shop.getOffer().getCategories().size() + 1));
+        newCategory.setName(categoryNameTextField.getText());
+        if (categoryParentChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
+            newCategory.setParent(shop.getOffer().getCategories().get(categoryParentChoiceBox.getSelectionModel().getSelectedIndex()));
+        }
+        shop.getOffer().getCategories().add(newCategory);
+        updateCategoriesListViews();
+    }
+
+    private void editCategory() {
+        Category selectedCategory = shop.getOffer().getCategories().get(categoriesListView.getSelectionModel().getSelectedIndex());
+        selectedCategory.setName(categoryNameTextField.getText());
+        if (categoryParentChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
+            selectedCategory.setParent(shop.getOffer().getCategories().get(categoryParentChoiceBox.getSelectionModel().getSelectedIndex()));
+        }
+        updateCategoriesListViews();
+    }
+
+    private void removeCategory() {
+        Category selectedCategory = shop.getOffer().getCategories().get(categoriesListView.getSelectionModel().getSelectedIndex());
+        shop.getOffer().getCategories().remove(selectedCategory);
+        updateCategoriesListViews();
+    }
+
+    private void addProduct() {
+        Product newProduct = new Product();
+        newProduct.setId("P" + String.format("%03d", shop.getOffer().getProducts().size() + 1));
+        newProduct.setName(productNameTextField.getText());
+        newProduct.setCategory(shop.getOffer().getCategories().get(productCategoryChoiceBox.getSelectionModel().getSelectedIndex()));
+        newProduct.setPrice(new Price(productCurrencyTextField.getText(), Double.valueOf(productPriceTextField.getText())));
+        if (productMarkedRadioButton.isSelected()) {
+            newProduct.setMarked("");
+        } else {
+            newProduct.setUnmarked("");
+        }
+        shop.getOffer().getProducts().add(newProduct);
+        updateProductsListViews();
+    }
+
+    private void editProduct() {
+        Product selectedProduct = shop.getOffer().getProducts().get(productsListView.getSelectionModel().getSelectedIndex());
+        selectedProduct.setName(productNameTextField.getText());
+        selectedProduct.setCategory(shop.getOffer().getCategories().get(productCategoryChoiceBox.getSelectionModel().getSelectedIndex()));
+        selectedProduct.setPrice(new Price(productCurrencyTextField.getText(), Double.valueOf(productPriceTextField.getText())));
+        if (productMarkedRadioButton.isSelected()) {
+            selectedProduct.setMarked("");
+        } else {
+            selectedProduct.setUnmarked("");
+        }
+        updateProductsListViews();
+    }
+
+    private void removeProduct() {
+        Product selectedProduct = shop.getOffer().getProducts().get(productsListView.getSelectionModel().getSelectedIndex());
+        shop.getOffer().getProducts().remove(selectedProduct);
+        updateProductsListViews();
     }
 
     private void handleException(Exception e) {
