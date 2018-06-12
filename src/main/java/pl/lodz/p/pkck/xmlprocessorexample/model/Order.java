@@ -16,7 +16,7 @@ public class Order {
     private Client client;
 
     @XmlElements(@XmlElement(name = "produkt"))
-    private ArrayList<ProductOrder> products;
+    private ArrayList<ProductOrder> products = new ArrayList<>();
 
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @XmlElement(name = "data", required = true)
@@ -28,10 +28,19 @@ public class Order {
     public Order() {
     }
 
-    public Order(ArrayList<ProductOrder> products, LocalDate date, String description) {
+    public Order(Client client, ArrayList<ProductOrder> products, LocalDate date, String description) {
+        this.client = client;
         this.products = products;
         this.date = date;
         this.description = description;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public ArrayList<ProductOrder> getProducts() {
@@ -56,5 +65,10 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return client.getId() + ": " + date.toString() + " (" + description + ")";
     }
 }

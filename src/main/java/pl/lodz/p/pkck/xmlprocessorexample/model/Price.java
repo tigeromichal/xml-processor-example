@@ -35,4 +35,9 @@ public class Price {
     public void setValue(double value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return Double.toString(value) + " " + currency;
+    }
 }

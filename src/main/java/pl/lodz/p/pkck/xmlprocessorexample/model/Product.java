@@ -85,4 +85,9 @@ public class Product {
     public void setUnmarked(String unmarked) {
         this.unmarked = unmarked;
     }
+
+    @Override
+    public String toString() {
+        return id + ": " + name + ", " + price.toString() + " [" + category.getName() + "]";
+    }
 }

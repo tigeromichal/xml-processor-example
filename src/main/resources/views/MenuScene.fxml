@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="900.0" prefWidth="1340.0" stylesheets="@style/menuScene.css"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="900.0" prefWidth="1340.0"
+            stylesheets="@style/menuScene.css" xmlns="http://javafx.com/javafx/8.0.111"
             fx:controller="pl.lodz.p.pkck.xmlprocessorexample.controller.MenuController">
 
     <!-- HEADER -->

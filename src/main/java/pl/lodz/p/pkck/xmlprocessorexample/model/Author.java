@@ -50,4 +50,10 @@ public class Author {
     public void setIndexNumber(String indexNumber) {
         this.indexNumber = indexNumber;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + lastName + " " + indexNumber;
+    }
+
 }

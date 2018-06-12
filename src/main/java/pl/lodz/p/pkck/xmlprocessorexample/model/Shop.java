@@ -1,6 +1,7 @@
 package pl.lodz.p.pkck.xmlprocessorexample.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "sklep")
@@ -8,18 +9,18 @@ import java.util.List;
 public class Shop {
 
     @XmlElement(name = "nagłówek", required = true)
-    private Header header;
+    private Header header = new Header();
 
     @XmlElementWrapper(name = "klienci", required = true)
     @XmlElement(name = "klient")
-    private List<Client> clients;
+    private List<Client> clients = new ArrayList<>();
 
     @XmlElement(name = "oferta", required = true)
-    private Offer offer;
+    private Offer offer = new Offer();
 
     @XmlElementWrapper(name = "zamówienia", required = true)
     @XmlElement(name = "zamówienie")
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public Shop() {
     }

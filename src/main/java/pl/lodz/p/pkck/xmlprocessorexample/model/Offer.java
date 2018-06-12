@@ -1,6 +1,7 @@
 package pl.lodz.p.pkck.xmlprocessorexample.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "oferta")
@@ -9,11 +10,11 @@ public class Offer {
 
     @XmlElementWrapper(name = "kategorie", required = true)
     @XmlElement(name = "kategoria")
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     @XmlElementWrapper(name = "produkty", required = true)
     @XmlElement(name = "produkt_definicja")
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Offer() {
     }

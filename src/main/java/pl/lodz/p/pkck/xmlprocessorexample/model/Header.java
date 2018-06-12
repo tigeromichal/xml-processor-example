@@ -5,6 +5,7 @@ import pl.lodz.p.pkck.xmlprocessorexample.utils.LocalDateAdapter;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "nagłówek")
@@ -19,7 +20,7 @@ public class Header {
     private LocalDate date;
 
     @XmlElements(@XmlElement(name = "autor"))
-    private List<Author> authors;
+    private List<Author> authors = new ArrayList<>();
 
     public Header() {
     }
