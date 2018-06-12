@@ -113,7 +113,7 @@
             <Font name="System Bold" size="12.0"/>
         </font>
     </Label>
-    <ListView layoutX="1075.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
+    <ListView fx:id="ordersListView" layoutX="1075.0" layoutY="50.0" prefHeight="400.0" prefWidth="250.0"/>
     <Label layoutX="1075.0" layoutY="469.0" prefWidth="85.0" text="Klient"/>
     <Label layoutX="1075.0" layoutY="494.0" prefWidth="85.0" text="Produkt"/>
     <Label layoutX="1075.0" layoutY="519.0" prefWidth="85.0" text="Liczba"/>
@@ -123,7 +123,7 @@
     <ChoiceBox fx:id="orderProductChoiceBox" layoutX="1175.0" layoutY="490.0" prefWidth="150.0"/>
     <TextField fx:id="orderNumberTextField" layoutX="1175.0" layoutY="515.0" prefWidth="150.0"/>
     <TextField fx:id="orderDateTextField" layoutX="1175.0" layoutY="540.0" prefWidth="150.0"/>
-    <TextArea fx:id="orderDescriptionTextField" layoutX="1175.0" layoutY="565.0" prefHeight="50.0" prefWidth="150.0"/>
+    <TextArea fx:id="orderDescriptionTextArea" layoutX="1175.0" layoutY="565.0" prefHeight="50.0" prefWidth="150.0"/>
     <Button fx:id="addOrderButton" layoutX="1075.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
             text="Dodaj zamówienie"/>
     <Button fx:id="editOrderButton" layoutX="1075.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
@@ -139,9 +139,11 @@
     <Label layoutX="15.0" layoutY="754.0" prefHeight="17.0" prefWidth="250.0"
            text="Nazwa pliku wejściowego XML Schema"/>
     <Label layoutX="15.0" layoutY="779.0" prefHeight="17.0" prefWidth="250.0" text="Nazwa pliku wyjściowego XML"/>
-    <TextField fx:id="inputXmlFileNameTextField" layoutX="280.0" layoutY="725.0" prefWidth="250.0"/>
+    <TextField fx:id="inputXmlFileNameTextField" layoutX="280.0" layoutY="725.0" prefWidth="250.0"
+               text="zamówienia.xml"/>
     <TextField fx:id="inputXmlSchemaFileNameTextField" layoutX="280.0" layoutY="750.0" prefWidth="250.0"/>
-    <TextField fx:id="outputXmlFileNameTextField" layoutX="280.0" layoutY="775.0" prefWidth="250.0"/>
+    <TextField fx:id="outputXmlFileNameTextField" layoutX="280.0" layoutY="775.0" prefWidth="250.0"
+               text="zamówienia-output.xml"/>
     <Button fx:id="loadXmlButton" layoutX="15.0" layoutY="835.0" minHeight="50.0" mnemonicParsing="false"
             prefWidth="250.0"
             text="Wczytaj XML">
