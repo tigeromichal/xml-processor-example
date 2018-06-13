@@ -480,27 +480,49 @@ public class MenuController extends Controller {
     }
 
     private void addOrder() {
-
+        Order newOrder = new Order();
+        newOrder.setClient(shop.getClients().get(orderClientChoiceBox.getSelectionModel().getSelectedIndex()));
+        newOrder.setDate(LocalDate.parse(orderDateTextField.getText()));
+        newOrder.setDescription(orderDescriptionTextArea.getText());
+        shop.getOrders().add(newOrder);
+        updateOrdersListViews();
     }
 
     private void editOrder() {
-
+        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        selectedOrder.setClient(shop.getClients().get(orderClientChoiceBox.getSelectionModel().getSelectedIndex()));
+        selectedOrder.setDate(LocalDate.parse(orderDateTextField.getText()));
+        selectedOrder.setDescription(orderDescriptionTextArea.getText());
+        updateOrdersListViews();
     }
 
     private void removeOrder() {
-
+        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        shop.getOrders().remove(selectedOrder);
+        updateOrdersListViews();
     }
 
     private void addProductToOrder() {
-
+        ProductOrder newProductOrder = new ProductOrder();
+        newProductOrder.setNumber(Integer.valueOf(orderNumberTextField.getText()));
+        newProductOrder.setProduct(shop.getOffer().getProducts().get(orderProductChoiceBox.getSelectionModel().getSelectedIndex()));
+        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        selectedOrder.getProducts().add(newProductOrder);
+        updateProductsInOrderListViews();
     }
 
     private void editProductNumber() {
-
+        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
+        selectedProductOrder.setNumber(Integer.valueOf(orderNumberTextField.getText()));
+        updateProductsInOrderListViews();
     }
 
     private void removeProductFromOrder() {
-
+        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
+        selectedOrder.getProducts().remove(selectedProductOrder);
+        updateProductsInOrderListViews();
     }
 
     private void savePdf() {
