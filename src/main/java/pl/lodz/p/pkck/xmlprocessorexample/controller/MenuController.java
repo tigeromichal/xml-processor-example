@@ -257,7 +257,7 @@ public class MenuController extends Controller {
                             .collect(Collectors.toList()));
             productsInOrderListView.setItems(productsInOrderObservableList);
         } else {
-            ordersListView.getItems().clear();
+            productsInOrderListView.getItems().clear();
         }
     }
 
@@ -399,7 +399,9 @@ public class MenuController extends Controller {
 
     private void addClient() {
         Client newClient = new Client();
-        newClient.setId("K" + String.format("%03d", shop.getClients().size() + 1));
+        String maxIdString = shop.getClients().stream().map(Client::getId).max(String.CASE_INSENSITIVE_ORDER).orElse(null);
+        String newId = "K" + String.format("%03d", Integer.valueOf(maxIdString.substring(1)) + 1);
+        newClient.setId(newId);
         newClient.setName(clientNameTextField.getText());
         newClient.setLastName(clientLastNameTextField.getText());
         shop.getClients().add(newClient);
@@ -421,7 +423,9 @@ public class MenuController extends Controller {
 
     private void addCategory() {
         Category newCategory = new Category();
-        newCategory.setId("KAT" + String.format("%03d", shop.getOffer().getCategories().size() + 1));
+        String maxIdString = shop.getOffer().getCategories().stream().map(Category::getId).max(String.CASE_INSENSITIVE_ORDER).orElse(null);
+        String newId = "KAT" + String.format("%03d", Integer.valueOf(maxIdString.substring(3)) + 1);
+        newCategory.setId(newId);
         newCategory.setName(categoryNameTextField.getText());
         if (categoryParentChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
             newCategory.setParent(shop.getOffer().getCategories().get(categoryParentChoiceBox.getSelectionModel().getSelectedIndex()));
@@ -447,7 +451,9 @@ public class MenuController extends Controller {
 
     private void addProduct() {
         Product newProduct = new Product();
-        newProduct.setId("P" + String.format("%03d", shop.getOffer().getProducts().size() + 1));
+        String maxIdString = shop.getOffer().getProducts().stream().map(Product::getId).max(String.CASE_INSENSITIVE_ORDER).orElse(null);
+        String newId = "P" + String.format("%03d", Integer.valueOf(maxIdString.substring(1)) + 1);
+        newProduct.setId(newId);
         newProduct.setName(productNameTextField.getText());
         newProduct.setCategory(shop.getOffer().getCategories().get(productCategoryChoiceBox.getSelectionModel().getSelectedIndex()));
         newProduct.setPrice(new Price(productCurrencyTextField.getText(), Double.valueOf(productPriceTextField.getText())));

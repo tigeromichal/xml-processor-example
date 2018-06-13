@@ -20,10 +20,10 @@ public class Product {
     @XmlElement(name = "cena", required = true)
     private Price price;
 
-    @XmlElement(name = "wyróżniony", required = true, nillable = true)
+    @XmlElement(name = "wyróżniony", required = false)
     private String marked;
 
-    @XmlElement(name = "niewyróżniony", required = true, nillable = true)
+    @XmlElement(name = "niewyróżniony", required = false)
     private String unmarked;
 
     public Product() {
