@@ -13,8 +13,6 @@ import pl.lodz.p.pkck.xmlprocessorexample.model.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class MenuController extends Controller {
 
@@ -206,55 +204,36 @@ public class MenuController extends Controller {
     }
 
     private void updateAuthorsListViews() {
-        authorsListView.setItems(FXCollections.observableArrayList(shop.getHeader().getAuthors()
-                .stream()
-                .map(Author::toString)
-                .collect(Collectors.toList())));
+        authorsListView.setItems(FXCollections.observableArrayList(shop.getHeader().getAuthors()));
     }
 
     private void updateClientsListViews() {
-        ObservableList<String> clientsStringObservableList = FXCollections.observableArrayList(shop.getClients()
-                .stream()
-                .map(Client::toString)
-                .collect(Collectors.toList()));
+        ObservableList<Client> clientsStringObservableList = FXCollections.observableArrayList(shop.getClients());
         clientsListView.setItems(clientsStringObservableList);
         orderClientChoiceBox.setItems(clientsStringObservableList);
     }
 
     private void updateCategoriesListViews() {
-        ObservableList<String> categoriesStringObservableList = FXCollections.observableArrayList(shop.getOffer().getCategories()
-                .stream()
-                .map(Category::toString)
-                .collect(Collectors.toList()));
+        ObservableList<Category> categoriesStringObservableList = FXCollections.observableArrayList(shop.getOffer().getCategories());
         categoriesListView.setItems(categoriesStringObservableList);
         categoryParentChoiceBox.setItems(categoriesStringObservableList);
         productCategoryChoiceBox.setItems(categoriesStringObservableList);
     }
 
     private void updateProductsListViews() {
-        ObservableList<String> productsStringObservableList = FXCollections.observableArrayList(shop.getOffer().getProducts()
-                .stream()
-                .map(Product::toString)
-                .collect(Collectors.toList()));
+        ObservableList<Product> productsStringObservableList = FXCollections.observableArrayList(shop.getOffer().getProducts());
         productsListView.setItems(productsStringObservableList);
         orderProductChoiceBox.setItems(productsStringObservableList);
     }
 
     private void updateOrdersListViews() {
-        ordersListView.setItems(FXCollections.observableArrayList(shop.getOrders()
-                .stream()
-                .map(Order::toString)
-                .collect(Collectors.toList())));
+        ordersListView.setItems(FXCollections.observableArrayList(shop.getOrders()));
     }
 
     private void updateProductsInOrderListViews() {
         if (ordersListView.getSelectionModel().getSelectedIndex() >= 0) {
-            ObservableList<String> productsInOrderObservableList = FXCollections.observableArrayList(
-                    shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex())
-                            .getProducts()
-                            .stream()
-                            .map(Object::toString)
-                            .collect(Collectors.toList()));
+            ObservableList<ProductOrder> productsInOrderObservableList = FXCollections.observableArrayList(
+                    ((Order) (ordersListView.getSelectionModel().getSelectedItem())).getProducts());
             productsInOrderListView.setItems(productsInOrderObservableList);
         } else {
             productsInOrderListView.getItems().clear();
@@ -269,7 +248,7 @@ public class MenuController extends Controller {
     private void initializeAuthorsListView() {
         authorsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Author selectedAuthor = shop.getHeader().getAuthors().get(newValue.intValue());
+                Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
                 authorNameTextField.setText(selectedAuthor.getName());
                 authorLastNameTextField.setText(selectedAuthor.getLastName());
                 authorIndexNumberTextField.setText(selectedAuthor.getIndexNumber());
@@ -284,7 +263,7 @@ public class MenuController extends Controller {
     private void initializeClientsListView() {
         clientsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Client selectedClient = shop.getClients().get(newValue.intValue());
+                Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
                 clientNameTextField.setText(selectedClient.getName());
                 clientLastNameTextField.setText(selectedClient.getLastName());
             } else {
@@ -297,13 +276,10 @@ public class MenuController extends Controller {
     private void initializeCategoriesListView() {
         categoriesListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Category selectedCategory = shop.getOffer().getCategories().get(newValue.intValue());
+                Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
                 categoryNameTextField.setText(selectedCategory.getName());
                 if (selectedCategory.getParent() != null) {
-                    int parentIndex = IntStream.range(0, shop.getOffer().getCategories().size())
-                            .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedCategory.getParent().getId()))
-                            .findFirst().getAsInt();
-                    categoryParentChoiceBox.getSelectionModel().select(parentIndex);
+                    categoryParentChoiceBox.getSelectionModel().select(selectedCategory.getParent());
                 } else {
                     categoryParentChoiceBox.getSelectionModel().clearSelection();
                 }
@@ -317,12 +293,9 @@ public class MenuController extends Controller {
     private void initializeProductsListView() {
         productsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Product selectedProduct = shop.getOffer().getProducts().get(newValue.intValue());
+                Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
                 productNameTextField.setText(selectedProduct.getName());
-                int categoryIndex = IntStream.range(0, shop.getOffer().getCategories().size())
-                        .filter(i -> shop.getOffer().getCategories().get(i).getId().equals(selectedProduct.getCategory().getId()))
-                        .findFirst().getAsInt();
-                productCategoryChoiceBox.getSelectionModel().select(categoryIndex);
+                productCategoryChoiceBox.getSelectionModel().select(selectedProduct.getCategory());
                 productPriceTextField.setText(Double.toString(selectedProduct.getPrice().getValue()));
                 productCurrencyTextField.setText(selectedProduct.getPrice().getCurrency());
                 productMarkedRadioButton.selectedProperty().setValue(selectedProduct.getMarked() != null);
@@ -339,11 +312,8 @@ public class MenuController extends Controller {
     private void initializeOrdersListView() {
         ordersListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Order selectedOrder = shop.getOrders().get(newValue.intValue());
-                int clientIndex = IntStream.range(0, shop.getClients().size())
-                        .filter(i -> shop.getClients().get(i).getId().equals(selectedOrder.getClient().getId()))
-                        .findFirst().getAsInt();
-                orderClientChoiceBox.getSelectionModel().select(clientIndex);
+                Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+                orderClientChoiceBox.getSelectionModel().select(selectedOrder.getClient());
                 orderDateTextField.setText(selectedOrder.getDate().toString());
                 orderDescriptionTextArea.setText(selectedOrder.getDescription());
             } else {
@@ -358,12 +328,8 @@ public class MenuController extends Controller {
     private void initializeProductsInOrderListView() {
         productsInOrderListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                ProductOrder selectedProductOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex())
-                        .getProducts().get(newValue.intValue());
-                int productIndex = IntStream.range(0, shop.getOffer().getProducts().size())
-                        .filter(i -> shop.getOffer().getProducts().get(i).getId().equals(selectedProductOrder.getProduct().getId()))
-                        .findFirst().getAsInt();
-                orderProductChoiceBox.getSelectionModel().select(productIndex);
+                ProductOrder selectedProductOrder = (ProductOrder) productsInOrderListView.getSelectionModel().getSelectedItem();
+                orderProductChoiceBox.getSelectionModel().select(selectedProductOrder.getProduct());
                 orderNumberTextField.setText(Integer.toString(selectedProductOrder.getNumber()));
             } else {
                 orderClientChoiceBox.getSelectionModel().clearSelection();
@@ -384,7 +350,7 @@ public class MenuController extends Controller {
     }
 
     private void editAuthor() {
-        Author selectedAuthor = shop.getHeader().getAuthors().get(authorsListView.getSelectionModel().getSelectedIndex());
+        Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
         selectedAuthor.setName(authorNameTextField.getText());
         selectedAuthor.setLastName(authorLastNameTextField.getText());
         selectedAuthor.setIndexNumber(authorIndexNumberTextField.getText());
@@ -392,7 +358,7 @@ public class MenuController extends Controller {
     }
 
     private void removeAuthor() {
-        Author selectedAuthor = shop.getHeader().getAuthors().get(authorsListView.getSelectionModel().getSelectedIndex());
+        Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
         shop.getHeader().getAuthors().remove(selectedAuthor);
         updateAuthorsListViews();
     }
@@ -409,14 +375,14 @@ public class MenuController extends Controller {
     }
 
     private void editClient() {
-        Client selectedClient = shop.getClients().get(clientsListView.getSelectionModel().getSelectedIndex());
+        Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
         selectedClient.setName(clientNameTextField.getText());
         selectedClient.setLastName(clientLastNameTextField.getText());
         updateClientsListViews();
     }
 
     private void removeClient() {
-        Client selectedClient = shop.getClients().get(clientsListView.getSelectionModel().getSelectedIndex());
+        Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
         shop.getClients().remove(selectedClient);
         updateClientsListViews();
     }
@@ -435,7 +401,7 @@ public class MenuController extends Controller {
     }
 
     private void editCategory() {
-        Category selectedCategory = shop.getOffer().getCategories().get(categoriesListView.getSelectionModel().getSelectedIndex());
+        Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
         selectedCategory.setName(categoryNameTextField.getText());
         if (categoryParentChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
             selectedCategory.setParent(shop.getOffer().getCategories().get(categoryParentChoiceBox.getSelectionModel().getSelectedIndex()));
@@ -444,7 +410,7 @@ public class MenuController extends Controller {
     }
 
     private void removeCategory() {
-        Category selectedCategory = shop.getOffer().getCategories().get(categoriesListView.getSelectionModel().getSelectedIndex());
+        Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
         shop.getOffer().getCategories().remove(selectedCategory);
         updateCategoriesListViews();
     }
@@ -467,7 +433,7 @@ public class MenuController extends Controller {
     }
 
     private void editProduct() {
-        Product selectedProduct = shop.getOffer().getProducts().get(productsListView.getSelectionModel().getSelectedIndex());
+        Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
         selectedProduct.setName(productNameTextField.getText());
         selectedProduct.setCategory(shop.getOffer().getCategories().get(productCategoryChoiceBox.getSelectionModel().getSelectedIndex()));
         selectedProduct.setPrice(new Price(productCurrencyTextField.getText(), Double.valueOf(productPriceTextField.getText())));
@@ -480,7 +446,7 @@ public class MenuController extends Controller {
     }
 
     private void removeProduct() {
-        Product selectedProduct = shop.getOffer().getProducts().get(productsListView.getSelectionModel().getSelectedIndex());
+        Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
         shop.getOffer().getProducts().remove(selectedProduct);
         updateProductsListViews();
     }
@@ -495,7 +461,7 @@ public class MenuController extends Controller {
     }
 
     private void editOrder() {
-        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
         selectedOrder.setClient(shop.getClients().get(orderClientChoiceBox.getSelectionModel().getSelectedIndex()));
         selectedOrder.setDate(LocalDate.parse(orderDateTextField.getText()));
         selectedOrder.setDescription(orderDescriptionTextArea.getText());
@@ -503,7 +469,7 @@ public class MenuController extends Controller {
     }
 
     private void removeOrder() {
-        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
         shop.getOrders().remove(selectedOrder);
         updateOrdersListViews();
     }
@@ -518,14 +484,14 @@ public class MenuController extends Controller {
     }
 
     private void editProductNumber() {
-        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
         ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
         selectedProductOrder.setNumber(Integer.valueOf(orderNumberTextField.getText()));
         updateProductsInOrderListViews();
     }
 
     private void removeProductFromOrder() {
-        Order selectedOrder = shop.getOrders().get(ordersListView.getSelectionModel().getSelectedIndex());
+        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
         ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
         selectedOrder.getProducts().remove(selectedProductOrder);
         updateProductsInOrderListViews();
