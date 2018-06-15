@@ -204,29 +204,38 @@ public class MenuController extends Controller {
     }
 
     private void updateAuthorsListViews() {
+        authorsListView.getItems().clear();
         authorsListView.setItems(FXCollections.observableArrayList(shop.getHeader().getAuthors()));
     }
 
     private void updateClientsListViews() {
         ObservableList<Client> clientsStringObservableList = FXCollections.observableArrayList(shop.getClients());
+        clientsListView.getItems().clear();
         clientsListView.setItems(clientsStringObservableList);
+        orderClientChoiceBox.getItems().clear();
         orderClientChoiceBox.setItems(clientsStringObservableList);
     }
 
     private void updateCategoriesListViews() {
         ObservableList<Category> categoriesStringObservableList = FXCollections.observableArrayList(shop.getOffer().getCategories());
+        categoriesListView.getItems().clear();
         categoriesListView.setItems(categoriesStringObservableList);
+        categoryParentChoiceBox.getItems().clear();
         categoryParentChoiceBox.setItems(categoriesStringObservableList);
+        productCategoryChoiceBox.getItems().clear();
         productCategoryChoiceBox.setItems(categoriesStringObservableList);
     }
 
     private void updateProductsListViews() {
         ObservableList<Product> productsStringObservableList = FXCollections.observableArrayList(shop.getOffer().getProducts());
+        productsListView.getItems().clear();
         productsListView.setItems(productsStringObservableList);
+        orderProductChoiceBox.getItems().clear();
         orderProductChoiceBox.setItems(productsStringObservableList);
     }
 
     private void updateOrdersListViews() {
+        ordersListView.getItems().clear();
         ordersListView.setItems(FXCollections.observableArrayList(shop.getOrders()));
     }
 
@@ -234,6 +243,7 @@ public class MenuController extends Controller {
         if (ordersListView.getSelectionModel().getSelectedIndex() >= 0) {
             ObservableList<ProductOrder> productsInOrderObservableList = FXCollections.observableArrayList(
                     ((Order) (ordersListView.getSelectionModel().getSelectedItem())).getProducts());
+            productsInOrderListView.getItems().clear();
             productsInOrderListView.setItems(productsInOrderObservableList);
         } else {
             productsInOrderListView.getItems().clear();

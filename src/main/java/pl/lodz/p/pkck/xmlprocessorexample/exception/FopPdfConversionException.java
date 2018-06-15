@@ -11,7 +11,7 @@ public class FopPdfConversionException extends Exception {
     }
 
     public FopPdfConversionException(String message, Throwable cause) {
-        super(message, cause);
+        super(message == null ? cause.getCause().getMessage() : message, cause);
     }
 
 }

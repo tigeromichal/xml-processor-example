@@ -32,11 +32,11 @@
     <TextField fx:id="authorNameTextField" layoutX="115.0" layoutY="465.0" prefWidth="150.0"/>
     <TextField fx:id="authorLastNameTextField" layoutX="115.0" layoutY="490.0" prefWidth="150.0"/>
     <TextField fx:id="authorIndexNumberTextField" layoutX="115.0" layoutY="515.0" prefWidth="150.0"/>
-    <Button fx:id="addAuthorButton" layoutX="15.0" layoutY="615.0" mnemonicParsing="false" prefWidth="250.0"
+    <Button fx:id="addAuthorButton" layoutX="15.0" layoutY="590.0" mnemonicParsing="false" prefWidth="250.0"
             text="Dodaj autora"/>
-    <Button fx:id="editAuthorButton" layoutX="15.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
+    <Button fx:id="editAuthorButton" layoutX="15.0" layoutY="615.0" mnemonicParsing="false" prefHeight="25.0"
             prefWidth="250.0" text="Edytuj autora"/>
-    <Button fx:id="removeAuthorButton" layoutX="15.0" layoutY="665.0" mnemonicParsing="false" prefHeight="25.0"
+    <Button fx:id="removeAuthorButton" layoutX="15.0" layoutY="640.0" mnemonicParsing="false" prefHeight="25.0"
             prefWidth="250.0" text="Usuń autora"/>
 
     <!-- CLIENTS -->
