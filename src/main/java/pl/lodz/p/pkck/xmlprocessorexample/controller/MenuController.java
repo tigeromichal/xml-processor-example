@@ -23,7 +23,7 @@ public class MenuController extends Controller {
     @FXML
     private TextField headerDateTextField;
     @FXML
-    private ListView authorsListView;
+    private ListView<Author> authorsListView;
     @FXML
     private TextField authorNameTextField;
     @FXML
@@ -37,7 +37,7 @@ public class MenuController extends Controller {
     @FXML
     private Button removeAuthorButton;
     @FXML
-    private ListView clientsListView;
+    private ListView<Client> clientsListView;
     @FXML
     private TextField clientNameTextField;
     @FXML
@@ -49,9 +49,9 @@ public class MenuController extends Controller {
     @FXML
     private Button removeClientButton;
     @FXML
-    private ListView categoriesListView;
+    private ListView<Category> categoriesListView;
     @FXML
-    private ChoiceBox categoryParentChoiceBox;
+    private ChoiceBox<Category> categoryParentChoiceBox;
     @FXML
     private TextField categoryNameTextField;
     @FXML
@@ -61,9 +61,9 @@ public class MenuController extends Controller {
     @FXML
     private Button removeCategoryButton;
     @FXML
-    private ListView productsListView;
+    private ListView<Product> productsListView;
     @FXML
-    private ChoiceBox productCategoryChoiceBox;
+    private ChoiceBox<Category> productCategoryChoiceBox;
     @FXML
     private TextField productNameTextField;
     @FXML
@@ -79,9 +79,9 @@ public class MenuController extends Controller {
     @FXML
     private Button removeProductButton;
     @FXML
-    private ListView ordersListView;
+    private ListView<Order> ordersListView;
     @FXML
-    private ChoiceBox orderClientChoiceBox;
+    private ChoiceBox<Client> orderClientChoiceBox;
     @FXML
     private TextField orderDateTextField;
     @FXML
@@ -93,9 +93,9 @@ public class MenuController extends Controller {
     @FXML
     private Button removeOrderButton;
     @FXML
-    private ListView productsInOrderListView;
+    private ListView<ProductOrder> productsInOrderListView;
     @FXML
-    private ChoiceBox orderProductChoiceBox;
+    private ChoiceBox<Product> orderProductChoiceBox;
     @FXML
     private TextField orderNumberTextField;
     @FXML
@@ -242,7 +242,7 @@ public class MenuController extends Controller {
     private void updateProductsInOrderListViews() {
         if (ordersListView.getSelectionModel().getSelectedIndex() >= 0) {
             ObservableList<ProductOrder> productsInOrderObservableList = FXCollections.observableArrayList(
-                    ((Order) (ordersListView.getSelectionModel().getSelectedItem())).getProducts());
+                    ordersListView.getSelectionModel().getSelectedItem().getProducts());
             productsInOrderListView.getItems().clear();
             productsInOrderListView.setItems(productsInOrderObservableList);
         } else {
@@ -258,7 +258,7 @@ public class MenuController extends Controller {
     private void initializeAuthorsListView() {
         authorsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
+                Author selectedAuthor = authorsListView.getSelectionModel().getSelectedItem();
                 authorNameTextField.setText(selectedAuthor.getName());
                 authorLastNameTextField.setText(selectedAuthor.getLastName());
                 authorIndexNumberTextField.setText(selectedAuthor.getIndexNumber());
@@ -273,7 +273,7 @@ public class MenuController extends Controller {
     private void initializeClientsListView() {
         clientsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
+                Client selectedClient = clientsListView.getSelectionModel().getSelectedItem();
                 clientNameTextField.setText(selectedClient.getName());
                 clientLastNameTextField.setText(selectedClient.getLastName());
             } else {
@@ -286,7 +286,7 @@ public class MenuController extends Controller {
     private void initializeCategoriesListView() {
         categoriesListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
+                Category selectedCategory = categoriesListView.getSelectionModel().getSelectedItem();
                 categoryNameTextField.setText(selectedCategory.getName());
                 if (selectedCategory.getParent() != null) {
                     categoryParentChoiceBox.getSelectionModel().select(selectedCategory.getParent());
@@ -303,7 +303,7 @@ public class MenuController extends Controller {
     private void initializeProductsListView() {
         productsListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
+                Product selectedProduct = productsListView.getSelectionModel().getSelectedItem();
                 productNameTextField.setText(selectedProduct.getName());
                 productCategoryChoiceBox.getSelectionModel().select(selectedProduct.getCategory());
                 productPriceTextField.setText(Double.toString(selectedProduct.getPrice().getValue()));
@@ -322,7 +322,7 @@ public class MenuController extends Controller {
     private void initializeOrdersListView() {
         ordersListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+                Order selectedOrder = ordersListView.getSelectionModel().getSelectedItem();
                 orderClientChoiceBox.getSelectionModel().select(selectedOrder.getClient());
                 orderDateTextField.setText(selectedOrder.getDate().toString());
                 orderDescriptionTextArea.setText(selectedOrder.getDescription());
@@ -338,7 +338,7 @@ public class MenuController extends Controller {
     private void initializeProductsInOrderListView() {
         productsInOrderListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
-                ProductOrder selectedProductOrder = (ProductOrder) productsInOrderListView.getSelectionModel().getSelectedItem();
+                ProductOrder selectedProductOrder = productsInOrderListView.getSelectionModel().getSelectedItem();
                 orderProductChoiceBox.getSelectionModel().select(selectedProductOrder.getProduct());
                 orderNumberTextField.setText(Integer.toString(selectedProductOrder.getNumber()));
             } else {
@@ -360,7 +360,7 @@ public class MenuController extends Controller {
     }
 
     private void editAuthor() {
-        Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
+        Author selectedAuthor = authorsListView.getSelectionModel().getSelectedItem();
         selectedAuthor.setName(authorNameTextField.getText());
         selectedAuthor.setLastName(authorLastNameTextField.getText());
         selectedAuthor.setIndexNumber(authorIndexNumberTextField.getText());
@@ -368,7 +368,7 @@ public class MenuController extends Controller {
     }
 
     private void removeAuthor() {
-        Author selectedAuthor = (Author) authorsListView.getSelectionModel().getSelectedItem();
+        Author selectedAuthor = authorsListView.getSelectionModel().getSelectedItem();
         shop.getHeader().getAuthors().remove(selectedAuthor);
         updateAuthorsListViews();
     }
@@ -385,14 +385,14 @@ public class MenuController extends Controller {
     }
 
     private void editClient() {
-        Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
+        Client selectedClient = clientsListView.getSelectionModel().getSelectedItem();
         selectedClient.setName(clientNameTextField.getText());
         selectedClient.setLastName(clientLastNameTextField.getText());
         updateClientsListViews();
     }
 
     private void removeClient() {
-        Client selectedClient = (Client) clientsListView.getSelectionModel().getSelectedItem();
+        Client selectedClient = clientsListView.getSelectionModel().getSelectedItem();
         shop.getClients().remove(selectedClient);
         updateClientsListViews();
     }
@@ -411,7 +411,7 @@ public class MenuController extends Controller {
     }
 
     private void editCategory() {
-        Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
+        Category selectedCategory = categoriesListView.getSelectionModel().getSelectedItem();
         selectedCategory.setName(categoryNameTextField.getText());
         if (categoryParentChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
             selectedCategory.setParent(shop.getOffer().getCategories().get(categoryParentChoiceBox.getSelectionModel().getSelectedIndex()));
@@ -420,7 +420,7 @@ public class MenuController extends Controller {
     }
 
     private void removeCategory() {
-        Category selectedCategory = (Category) categoriesListView.getSelectionModel().getSelectedItem();
+        Category selectedCategory = categoriesListView.getSelectionModel().getSelectedItem();
         shop.getOffer().getCategories().remove(selectedCategory);
         updateCategoriesListViews();
     }
@@ -443,7 +443,7 @@ public class MenuController extends Controller {
     }
 
     private void editProduct() {
-        Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
+        Product selectedProduct = productsListView.getSelectionModel().getSelectedItem();
         selectedProduct.setName(productNameTextField.getText());
         selectedProduct.setCategory(shop.getOffer().getCategories().get(productCategoryChoiceBox.getSelectionModel().getSelectedIndex()));
         selectedProduct.setPrice(new Price(productCurrencyTextField.getText(), Double.valueOf(productPriceTextField.getText())));
@@ -456,7 +456,7 @@ public class MenuController extends Controller {
     }
 
     private void removeProduct() {
-        Product selectedProduct = (Product) productsListView.getSelectionModel().getSelectedItem();
+        Product selectedProduct = productsListView.getSelectionModel().getSelectedItem();
         shop.getOffer().getProducts().remove(selectedProduct);
         updateProductsListViews();
     }
@@ -471,7 +471,7 @@ public class MenuController extends Controller {
     }
 
     private void editOrder() {
-        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+        Order selectedOrder = ordersListView.getSelectionModel().getSelectedItem();
         selectedOrder.setClient(shop.getClients().get(orderClientChoiceBox.getSelectionModel().getSelectedIndex()));
         selectedOrder.setDate(LocalDate.parse(orderDateTextField.getText()));
         selectedOrder.setDescription(orderDescriptionTextArea.getText());
@@ -479,7 +479,7 @@ public class MenuController extends Controller {
     }
 
     private void removeOrder() {
-        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+        Order selectedOrder = ordersListView.getSelectionModel().getSelectedItem();
         shop.getOrders().remove(selectedOrder);
         updateOrdersListViews();
     }
@@ -494,14 +494,14 @@ public class MenuController extends Controller {
     }
 
     private void editProductNumber() {
-        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+        Order selectedOrder = ordersListView.getSelectionModel().getSelectedItem();
         ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
         selectedProductOrder.setNumber(Integer.valueOf(orderNumberTextField.getText()));
         updateProductsInOrderListViews();
     }
 
     private void removeProductFromOrder() {
-        Order selectedOrder = (Order) ordersListView.getSelectionModel().getSelectedItem();
+        Order selectedOrder = ordersListView.getSelectionModel().getSelectedItem();
         ProductOrder selectedProductOrder = selectedOrder.getProducts().get(productsInOrderListView.getSelectionModel().getSelectedIndex());
         selectedOrder.getProducts().remove(selectedProductOrder);
         updateProductsInOrderListViews();

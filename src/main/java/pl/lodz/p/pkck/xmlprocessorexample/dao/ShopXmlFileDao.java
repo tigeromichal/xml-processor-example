@@ -27,7 +27,7 @@ public class ShopXmlFileDao implements Dao<Shop> {
 
     @Override
     public Shop read(String path) throws DaoException {
-        Shop shop = null;
+        Shop shop;
         try {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = sf.newSchema(new File("./" + xmlSchemaPath));
